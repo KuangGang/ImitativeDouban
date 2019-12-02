@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.kproduce.imitativedouban.BaseActivity;
 import com.kproduce.imitativedouban.R;
 import com.kproduce.imitativedouban.utils.DensityUtil;
 import com.kproduce.imitativedouban.utils.ScreenUtil;
