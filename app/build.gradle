@@ -1,8 +1,5 @@
 apply plugin: 'com.android.application'
 
-Properties signingProperties = new Properties()
-signingProperties.load(new FileInputStream(file("../signings/signing.properties")))
-
 android {
     compileSdkVersion compile_sdk_version
     buildToolsVersion build_tool_version
@@ -26,73 +23,26 @@ android {
         ignoreWarnings true
     }
 
-    signingConfigs {
-        release {
-            storeFile file(signingProperties['KEYSTORE_FILEPATH'])
-            storePassword signingProperties['STORE_PASSWORD']
-            keyAlias signingProperties['KEY_ALIAS']
-            keyPassword signingProperties['KEY_PASSWORD']
-        }
-    }
-
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField "boolean", "debugMode", "true"
-            signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
-            buildConfigField "boolean", "debugMode", "false"
-            signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            applicationVariants.all { variant ->
-                variant.outputs.all {
-                    outputFileName = "Weight.apk"
-                }
-            }
         }
     }
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
-    api 'com.android.support:design:' + support_library_version
-    api 'com.android.support:appcompat-v7:' + support_library_version
-    api 'com.android.support:recyclerview-v7:' + support_library_version
-    api 'com.android.support:support-v4:' + support_library_version
-    api 'com.android.support:support-v13:' + support_library_version
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:design:' + support_library_version
+    implementation 'com.android.support:appcompat-v7:' + support_library_version
+    implementation 'com.android.support:recyclerview-v7:' + support_library_version
+    implementation 'com.android.support:support-v4:' + support_library_version
+    implementation 'com.android.support:support-v13:' + support_library_version
 
-    // ViewModel 和 LiveData
-    api 'android.arch.lifecycle:extensions:' + lifecycle_version
-    // 仅用 LiveData（用于监听数据变化）
-    api 'android.arch.lifecycle:livedata:' + lifecycle_version
-    // 仅用 ViewModel（用于存储和UI关联的数据，不会随设备旋转销毁）
-    api 'android.arch.lifecycle:viewmodel:' + lifecycle_version
-    // LiveData 的 ReactiveStreams插件
-    api 'android.arch.lifecycle:reactivestreams:' + lifecycle_version
-    annotationProcessor 'android.arch.lifecycle:compiler:' + lifecycle_version
-    api 'android.arch.persistence.room:runtime:' + room_version
-    api 'android.arch.persistence.room:rxjava2:' + room_version
-    annotationProcessor 'android.arch.persistence.room:compiler:' + room_version
-
-    api 'com.google.dagger:dagger:' + dagger_version
-    api 'com.google.dagger:dagger-android-support:' + dagger_version
-    annotationProcessor 'com.google.dagger:dagger-compiler:' + dagger_version
-
-    api 'com.squareup.okhttp3:okhttp:' + okhttp3_version
-    api 'com.squareup.okhttp3:logging-interceptor:' + okhttp3_version
-    api 'com.squareup.retrofit2:retrofit:' + retrofit_version
-    api 'com.squareup.retrofit2:converter-gson:' + retrofit_version
-    api 'com.squareup.retrofit2:adapter-rxjava2:' + retrofit_version
-    api 'com.squareup.retrofit2:converter-simplexml:' + retrofit_version
-    api 'io.reactivex.rxjava2:rxjava:2.2.10'
-    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    api 'com.trello.rxlifecycle2:rxlifecycle:2.2.2'
-    api 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.2'
-
-    api 'org.jsoup:jsoup:1.11.3'
-    api 'com.orhanobut:logger:2.2.0'
+    implementation 'com.orhanobut:logger:2.2.0'
+    implementation 'com.jakewharton:butterknife:9.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
 }
 
