@@ -13,6 +13,7 @@ buildscript {
     repositories {
         maven { url "http://maven.aliyun.com/nexus/content/repositories/jcenter/" }
         maven { url "http://maven.aliyun.com/nexus/content/repositories/google/" }
+        maven { url "https://jitpack.io" }
 
         jcenter()
         mavenCentral()
@@ -28,6 +29,7 @@ allprojects {
     repositories {
         maven { url "http://maven.aliyun.com/nexus/content/repositories/jcenter/" }
         maven { url "http://maven.aliyun.com/nexus/content/repositories/google/" }
+        maven { url "https://jitpack.io" }
 
         jcenter()
         mavenCentral()

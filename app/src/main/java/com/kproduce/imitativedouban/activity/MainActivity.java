@@ -8,6 +8,9 @@ import com.kproduce.imitativedouban.R;
 
 import butterknife.BindView;
 
+/**
+ * @author kuanggang
+ */
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.rv)
@@ -15,7 +18,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-
         return R.layout.activity_main;
     }
 
