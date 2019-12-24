@@ -1,5 +1,8 @@
 package com.kproduce.imitativedouban.bean;
 
+/**
+ * @author kuanggang
+ */
 public class Movie {
     private String title;
     private String secTitle;
