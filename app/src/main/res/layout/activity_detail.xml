@@ -7,33 +7,31 @@
     <LinearLayout
         android:id="@+id/ll_title"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/view_title_status"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
 
         <RelativeLayout
-            android:id="@+id/rl_back"
-            android:layout_width="48dip"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
 
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="24dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="16dip" />
+            <RelativeLayout
+                android:id="@+id/rl_back"
+                android:layout_width="48dip"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="24dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dip" />
+            </RelativeLayout>
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_bar_name"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="16dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:text="@string/app_name"
-            android:textSize="14sp"
-            android:visibility="gone" />
     </LinearLayout>
 
     <com.kproduce.imitativedouban.view.VerticalDrawerLayout
@@ -47,48 +45,4 @@
         <include layout="@layout/layout_detail_handle" />
 
     </com.kproduce.imitativedouban.view.VerticalDrawerLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_title_second"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ll_title"
-        android:visibility="gone">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="56dp">
-
-            <View
-                android:layout_width="48dp"
-                android:layout_height="5dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="6dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="16dp"
-                android:text="@string/app_name"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_join_title_second"
-                android:layout_width="wrap_content"
-                android:layout_height="28dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:width="60dp"
-                android:gravity="center"
-                android:text="@string/app_name"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_alignParentBottom="true" />
-        </RelativeLayout>
-    </RelativeLayout>
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.kproduce.imitativedouban.activity;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
@@ -73,7 +74,9 @@ public class MainActivity extends BaseActivity {
             movieHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                    intent.putExtra("data", movie);
+                    startActivity(intent);
                 }
             });
         }

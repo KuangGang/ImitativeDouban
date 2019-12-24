@@ -1,9 +1,11 @@
 package com.kproduce.imitativedouban.bean;
 
+import java.io.Serializable;
+
 /**
  * @author kuanggang
  */
-public class Movie {
+public class Movie implements Serializable {
     private String title;
     private String secTitle;
     private String desc;

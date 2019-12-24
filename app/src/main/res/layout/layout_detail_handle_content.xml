@@ -1,136 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/holo_red_dark">
+    android:layout_height="match_parent">
 
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/sv_content"
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/sv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none">
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/view_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_background_shadow" />
 
             <LinearLayout
                 android:id="@+id/ll_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 android:orientation="vertical">
 
-                <ImageView
+                <View
+                    android:id="@+id/view_content_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="48dp" />
+
+                <com.kproduce.roundcorners.RoundImageView
                     android:id="@+id/iv_cover"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="16dp"
-                    android:src="@mipmap/ic_launcher" />
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="24dp"
-                    android:gravity="center"
-                    android:lineSpacingExtra="3dp"
-                    android:text="我们就是喜欢程序猿！程序员/编程交流组"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/app_name"
-                    android:textSize="11sp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/app_name"
-                        android:textSize="11sp" />
-
-                    <TextView
-                        android:id="@+id/tv_desc"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:lineSpacingExtra="1dp"
-                        android:text="大互谅网时代精英、IT发烧友、程序员、老站长、编程、新项目、投融资、交流学习组) \n\n分享是CSDN最基本的精神！所以我选择了这里！相信你也会的！\n每一个人在此都有机会！ \n每一个人在此会成为朋友！ \n每一个人都有可能成为创业大本营的一员！ \n分享你我的资源和经验！分享你我的知识和情谊！ \n\n来吧，加入我们~"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginBottom="32dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:text="@string/app_name"
-                        android:textSize="11sp" />
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_leader"
-                        android:layout_width="match_parent"
-                        android:layout_height="110dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="4dp"
-                        android:layout_marginBottom="8dp" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@android:color/black" />
-
-                    <LinearLayout
-                        android:id="@+id/ll_member"
-                        android:layout_width="match_parent"
-                        android:layout_height="64dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingEnd="16dp">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:id="@+id/tv_member_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/app_name"
-                            android:textSize="11sp" />
-
-                        <ImageView
-                            android:id="@+id/iv_member_angle"
-                            android:layout_width="6dp"
-                            android:layout_height="12dp"
-                            android:layout_marginStart="12dp" />
-                    </LinearLayout>
-                </LinearLayout>
+                    android:layout_width="112dp"
+                    android:layout_height="160dp"
+                    android:scaleType="centerCrop"
+                    app:rRadius="8dp" />
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1000dp"/>
+                    android:layout_height="1000dp" />
             </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
-</FrameLayout>
+        </FrameLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>
