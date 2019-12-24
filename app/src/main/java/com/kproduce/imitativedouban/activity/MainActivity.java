@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity {
 
         private Context mContext;
 
-        public MovieAdapter(Context context) {
+        MovieAdapter(Context context) {
             this.mContext = context;
         }
 
