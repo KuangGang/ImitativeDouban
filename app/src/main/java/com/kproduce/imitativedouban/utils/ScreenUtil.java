@@ -8,12 +8,9 @@ import android.view.WindowManager;
 
 /**
  * Created by KG on 2019/12/2
+ * @author kuanggang
  */
 public class ScreenUtil {
-
-    public static final int STANDARD_SCREEN_WIDTH = 0;
-    public static final int STANDARD_SCREEN_HEIGHT = 0;
-    public static final int STANDARD_SCREEN_DENSITY = 0;
 
     private static WindowManager windowManager;
 
@@ -41,7 +38,7 @@ public class ScreenUtil {
         } catch (Throwable e) {
             e.printStackTrace();
         }
-        return STANDARD_SCREEN_WIDTH;
+        return 0;
     }
 
     public static int getScreenHeight(Context context) {
@@ -61,7 +58,7 @@ public class ScreenUtil {
         } catch (Throwable e) {
             e.printStackTrace();
         }
-        return STANDARD_SCREEN_HEIGHT;
+        return 0;
     }
 
     public static int getStatusBarHeight(Context context) {
@@ -96,7 +93,7 @@ public class ScreenUtil {
             return displayMetrics.densityDpi;
         } catch (Throwable e) {
             e.printStackTrace();
-            return STANDARD_SCREEN_DENSITY;
+            return 0;
         }
     }
 
