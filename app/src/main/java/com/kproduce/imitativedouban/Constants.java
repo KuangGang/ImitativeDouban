@@ -5,6 +5,9 @@ import com.kproduce.imitativedouban.bean.Movie;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author kuanggang on 2020/01/05
+ */
 public class Constants {
     public static List<Movie> DATAS;
 
