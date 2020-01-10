@@ -113,8 +113,6 @@ public class DetailActivity extends BaseActivity {
 
     private void initListener() {
         vDrawer.setOnStatusChangeListener(new VerticalDrawerLayout.OnStatusChangeListener() {
-            private boolean isNameShownFirstTime = false;
-
             @Override
             public void onOpen() {
             }
