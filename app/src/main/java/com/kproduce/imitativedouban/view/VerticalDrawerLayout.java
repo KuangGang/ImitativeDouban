@@ -9,20 +9,21 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.kproduce.imitativedouban.R;
 import com.kproduce.imitativedouban.utils.ScreenUtil;
 
 /**
- * Created by KG on 2019/9/3.
+ * @author KG
+ * @date 2019/9/3
  * 垂直的DrawerLayout
  */
-public class VerticalDrawerLayout extends ViewGroup {
+public class VerticalDrawerLayout extends RelativeLayout {
     private static final String TAG = "VerticalDrawerLayout";
 
     private Context mContext;
     private View mDrawerView;
-    private View mBottomContentView;
     private ViewDragHelper mDragHelper;
     private boolean mIsOpenDrawer;
     private boolean mCanScrollDrawer = false;
@@ -163,8 +164,7 @@ public class VerticalDrawerLayout extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        mBottomContentView = getChildAt(0);
-        mDrawerView = getChildAt(1);
+        mDrawerView = getChildAt(0);
 
         int measureWidth = MeasureSpec.getSize(widthMeasureSpec);
         int measureHeight = MeasureSpec.getSize(heightMeasureSpec);
@@ -183,7 +183,6 @@ public class VerticalDrawerLayout extends ViewGroup {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         Log.e(TAG, "onLayout:  l=" + l + " t=" + t + " r=" + r + " b=" + b);
         int topValue = mDrawerView.getMeasuredHeight() - mVisHeight;
-        mBottomContentView.layout(l, 0, r, b - t);
         mDrawerView.layout(l, mIsOpenDrawer ? 0 : topValue, r, mIsOpenDrawer ? topValue + mVisHeight : b - t + topValue);
     }
 

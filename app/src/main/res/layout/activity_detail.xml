@@ -4,6 +4,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/sv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/view_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_background_shadow" />
+
+            <LinearLayout
+                android:id="@+id/ll_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <View
+                    android:id="@+id/view_content_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="48dp" />
+
+                <com.kproduce.roundcorners.RoundImageView
+                    android:id="@+id/iv_cover"
+                    android:layout_width="112dp"
+                    android:layout_height="160dp"
+                    android:scaleType="centerCrop"
+                    app:rRadius="8dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1000dp" />
+            </LinearLayout>
+        </FrameLayout>
+    </android.support.v4.widget.NestedScrollView>
+
     <LinearLayout
         android:id="@+id/ll_title"
         android:layout_width="match_parent"
@@ -38,11 +86,47 @@
         android:id="@+id/vd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/ll_title"
         app:vd_vis_height="116dp">
 
-        <include layout="@layout/layout_detail_handle_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <include layout="@layout/layout_detail_handle" />
+            <com.kproduce.roundcorners.RoundRelativeLayout
+                android:id="@+id/rl_bar_handle"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@android:color/white"
+                app:rTopRadius="10dp">
+
+                <View
+                    android:layout_width="48dp"
+                    android:layout_height="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="6dp"
+                    android:background="@android:color/black" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@android:color/black" />
+            </com.kproduce.roundcorners.RoundRelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1000dp"
+                android:layout_below="@id/rl_bar_handle"
+                android:background="@android:color/black" />
+
+            <FrameLayout
+                android:id="@+id/empty_handle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+        </RelativeLayout>
 
     </com.kproduce.imitativedouban.view.VerticalDrawerLayout>
 </RelativeLayout>
