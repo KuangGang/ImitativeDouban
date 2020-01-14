@@ -12,8 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -45,12 +46,14 @@ public class DetailActivity extends BaseActivity {
     View viewBackground;
     @BindView(R.id.ll_container)
     LinearLayout llContainer;
+    @BindView(R.id.rl_title)
+    RelativeLayout rlTitle;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
     @BindView(R.id.sv_content)
     NestedScrollView svContent;
     @BindView(R.id.vd)
     VerticalDrawerLayout vDrawer;
-    @BindView(R.id.empty_handle)
-    FrameLayout emptyHandle;
     @BindView(R.id.iv_cover)
     RoundImageView ivCover;
 
@@ -187,7 +190,7 @@ public class DetailActivity extends BaseActivity {
                                 public void onGenerated(Palette palette) {
                                     int darkMutedColor = palette.getDarkMutedColor(palette.getDarkMutedColor(Color.WHITE));
 
-
+                                    rlTitle.setBackgroundColor(darkMutedColor);
                                     viewBackground.setBackgroundColor(darkMutedColor);
                                 }
                             });

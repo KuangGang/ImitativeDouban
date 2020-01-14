@@ -4,129 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/sv_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
+    <include layout="@layout/view_detail_content" />
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <View
-                android:id="@+id/view_background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_background_shadow" />
-
-            <LinearLayout
-                android:id="@+id/ll_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <View
-                    android:id="@+id/view_content_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="48dp" />
-
-                <com.kproduce.roundcorners.RoundImageView
-                    android:id="@+id/iv_cover"
-                    android:layout_width="112dp"
-                    android:layout_height="160dp"
-                    android:scaleType="centerCrop"
-                    app:rRadius="8dp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1000dp" />
-            </LinearLayout>
-        </FrameLayout>
-    </android.support.v4.widget.NestedScrollView>
-
-    <LinearLayout
-        android:id="@+id/ll_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
-
-        <View
-            android:id="@+id/view_title_status"
-            android:layout_width="match_parent"
-            android:layout_height="0dp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp">
-
-            <RelativeLayout
-                android:id="@+id/rl_back"
-                android:layout_width="48dip"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="24dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="16dip" />
-            </RelativeLayout>
-        </RelativeLayout>
-    </LinearLayout>
+    <include
+        android:id="@+id/view_title"
+        layout="@layout/view_detail_title" />
 
     <com.kproduce.imitativedouban.view.VerticalDrawerLayout
         android:id="@+id/vd"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ll_title"
+        android:layout_below="@id/view_title"
         app:vd_vis_height="116dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.kproduce.roundcorners.RoundRelativeLayout
-                android:id="@+id/rl_bar_handle"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@android:color/white"
-                app:rTopRadius="10dp">
-
-                <View
-                    android:layout_width="48dp"
-                    android:layout_height="5dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="6dp"
-                    android:background="@android:color/black" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@android:color/black" />
-            </com.kproduce.roundcorners.RoundRelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1000dp"
-                android:layout_below="@id/rl_bar_handle"
-                android:background="@android:color/black" />
-
-            <FrameLayout
-                android:id="@+id/empty_handle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone" />
-
-        </RelativeLayout>
-
+        <include layout="@layout/view_detail_drawer" />
     </com.kproduce.imitativedouban.view.VerticalDrawerLayout>
 </RelativeLayout>

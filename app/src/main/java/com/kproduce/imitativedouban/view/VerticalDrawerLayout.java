@@ -8,7 +8,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.kproduce.imitativedouban.R;
@@ -27,6 +26,7 @@ public class VerticalDrawerLayout extends RelativeLayout {
     private ViewDragHelper mDragHelper;
     private boolean mIsOpenDrawer;
     private boolean mCanScrollDrawer = false;
+    private boolean mIsHandleDrawer = false;
     private int mVisHeight;
     private OnStatusChangeListener mOnStatusChangeListener;
 
@@ -72,7 +72,8 @@ public class VerticalDrawerLayout extends RelativeLayout {
         public boolean tryCaptureView(@NonNull View child, int pointerId) {
             Log.e(TAG, "tryCaptureView：pointerId=" + pointerId);
             startTime = System.currentTimeMillis();
-            return child == mDrawerView;
+            mIsHandleDrawer = child == mDrawerView;
+            return mIsHandleDrawer;
         }
 
         @Override
@@ -94,6 +95,7 @@ public class VerticalDrawerLayout extends RelativeLayout {
         @Override
         public void onViewReleased(@NonNull View releasedChild, float xvel, float yvel) {
             Log.e(TAG, "onViewReleased：xvel=" + xvel + " yvel=" + yvel);
+            mIsHandleDrawer = false;
             // 快速拖动逻辑
             endTime = System.currentTimeMillis();
             if (endTime - startTime < 200) {
@@ -152,7 +154,7 @@ public class VerticalDrawerLayout extends RelativeLayout {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         mDragHelper.processTouchEvent(event);
-        return true;
+        return mIsHandleDrawer;
     }
 
     @Override
@@ -217,7 +219,7 @@ public class VerticalDrawerLayout extends RelativeLayout {
         mDrawerView.setVisibility(VISIBLE);
     }
 
-    public void hideDrawer() {
+    public void dismissDrawer() {
         if (mDrawerView == null) {
             return;
         }
