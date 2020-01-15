@@ -12,6 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,30 +45,41 @@ import butterknife.OnClick;
  * @date 2019/9/2
  */
 public class DetailActivity extends BaseActivity {
-
-    @BindView(R.id.view_title_status)
-    View viewTitleStatus;
+    /**
+     * 内容
+     */
     @BindView(R.id.view_content_status)
     View viewContentStatus;
     @BindView(R.id.view_background)
     View viewBackground;
     @BindView(R.id.ll_container)
     LinearLayout llContainer;
+    @BindView(R.id.iv_cover)
+    RoundImageView ivCover;
+    /**
+     * 标题栏
+     */
     @BindView(R.id.view_title)
     ViewGroup viewTitle;
+    @BindView(R.id.view_title_status)
+    View viewTitleStatus;
     @BindView(R.id.view_title_back)
     View viewTitleBackground;
     @BindView(R.id.rl_title_background)
     RelativeLayout rlTitleBackground;
-
+    @BindView(R.id.iv_title_cover)
+    RoundImageView ivTitleCover;
+    @BindView(R.id.tv_title_name)
+    TextView tvTitleName;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(R.id.ll_title_cover)
+    LinearLayout llTitleCover;
+
     @BindView(R.id.sv_content)
     NestedScrollView svContent;
     @BindView(R.id.vd)
     VerticalDrawerLayout vDrawer;
-    @BindView(R.id.iv_cover)
-    RoundImageView ivCover;
 
     private Movie mData;
     private int mTransValue;
@@ -116,9 +132,12 @@ public class DetailActivity extends BaseActivity {
     }
 
     private void init() {
+        mTransValue = DensityUtil.dip2px(this, 90);
         setBackgroundColor();
         rlTitleBackground.setAlpha(0f);
-        mTransValue = DensityUtil.dip2px(this, 90);
+        tvTitleName.setText(mData.getTitle());
+        ivTitleCover.setImageResource(mData.getCoverId());
+
     }
 
     private void initListener() {
@@ -138,10 +157,12 @@ public class DetailActivity extends BaseActivity {
                 if (scrollY >= mTransValue) {
                     if (rlTitleBackground.getAlpha() != 1) {
                         rlTitleBackground.setAlpha(1f);
+                        showTitleCover();
                     }
                 } else {
                     float alpha = BigDecimal.valueOf(scrollY).divide(BigDecimal.valueOf(mTransValue), 5, BigDecimal.ROUND_HALF_UP).floatValue();
                     rlTitleBackground.setAlpha(alpha);
+                    dismissTitileCover();
                 }
 //                float bottomBlinRootY = flBottomBlinRoot.getY();
                 // 抽屉的显示和隐藏  * 132 = 48标题高度 + 84底部拖拽栏高度
@@ -204,5 +225,93 @@ public class DetailActivity extends BaseActivity {
                         return false;
                     }
                 }).load(mData.getCoverId()).into(ivCover);
+    }
+
+    private void showTitleCover() {
+        if (llTitleCover.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        // 标题电影封面动画
+        llTitleCover.setVisibility(View.VISIBLE);
+        TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 1, 0, 1, 0.7f, 1, 0f);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1f);
+
+        AnimationSet animationSet = new AnimationSet(true);
+        animationSet.addAnimation(translateAnimation);
+        animationSet.addAnimation(alphaAnimation);
+        animationSet.setDuration(250);
+        animationSet.setInterpolator(new DecelerateInterpolator());
+
+        llTitleCover.startAnimation(animationSet);
+
+        // 标题文字动画
+        TranslateAnimation titleTranslateAnimation = new TranslateAnimation(0, 0, 1, 0, 1, 0, 1, -0.5f);
+        AlphaAnimation titleAlphaAnimation = new AlphaAnimation(1f, 0f);
+
+        AnimationSet titleAnimationSet = new AnimationSet(true);
+        titleAnimationSet.addAnimation(titleTranslateAnimation);
+        titleAnimationSet.addAnimation(titleAlphaAnimation);
+        titleAnimationSet.setDuration(250);
+        titleAnimationSet.setInterpolator(new DecelerateInterpolator());
+        titleAnimationSet.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                tvTitle.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        tvTitle.startAnimation(titleAnimationSet);
+    }
+
+    private void dismissTitileCover() {
+        if (tvTitle.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        // 标题电影封面动画
+        TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 1, 0, 1, 0f, 1, 0.7f);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(1f, 0f);
+        AnimationSet animationSet = new AnimationSet(true);
+        animationSet.addAnimation(translateAnimation);
+        animationSet.addAnimation(alphaAnimation);
+        animationSet.setDuration(250);
+        animationSet.setInterpolator(new DecelerateInterpolator());
+        animationSet.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                llTitleCover.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        llTitleCover.startAnimation(animationSet);
+
+        // 标题文字动画
+        tvTitle.setVisibility(View.VISIBLE);
+        TranslateAnimation titleTranslateAnimation = new TranslateAnimation(0, 0, 1, 0, 1, -0.5f, 1, 0);
+        AlphaAnimation titleAlphaAnimation = new AlphaAnimation(0f, 1f);
+
+        AnimationSet titleAnimationSet = new AnimationSet(true);
+        titleAnimationSet.addAnimation(titleTranslateAnimation);
+        titleAnimationSet.addAnimation(titleAlphaAnimation);
+        titleAnimationSet.setDuration(250);
+        titleAnimationSet.setInterpolator(new DecelerateInterpolator());
+        tvTitle.startAnimation(titleAnimationSet);
     }
 }

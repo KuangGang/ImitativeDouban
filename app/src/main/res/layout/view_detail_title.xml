@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="101dp"
     android:orientation="vertical">
@@ -54,11 +55,38 @@
                         android:src="@mipmap/ic_back_white" />
                 </RelativeLayout>
 
+                <LinearLayout
+                    android:id="@+id/ll_title_cover"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/rl_back"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <com.kproduce.roundcorners.RoundImageView
+                        android:id="@+id/iv_title_cover"
+                        android:layout_width="25dp"
+                        android:layout_height="32dp"
+                        android:scaleType="centerCrop"
+                        app:rRadius="5dp" />
+
+                    <TextView
+                        android:id="@+id/tv_title_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_vertical"
                     android:text="@string/movie"
                     android:textColor="@android:color/white"
                     android:textSize="16sp" />
@@ -70,6 +98,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/ic_titlebar_shadow" />
 </LinearLayout>
