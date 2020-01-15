@@ -42,7 +42,7 @@
                     android:id="@+id/iv_cover"
                     android:layout_width="112dp"
                     android:layout_height="160dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:scaleType="centerCrop"
                     app:rRadius="8dp" />
 

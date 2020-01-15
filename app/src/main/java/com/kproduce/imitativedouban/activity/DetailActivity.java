@@ -25,9 +25,12 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.kproduce.imitativedouban.R;
 import com.kproduce.imitativedouban.bean.Movie;
+import com.kproduce.imitativedouban.utils.DensityUtil;
 import com.kproduce.imitativedouban.utils.ScreenUtil;
 import com.kproduce.imitativedouban.view.VerticalDrawerLayout;
 import com.kproduce.roundcorners.RoundImageView;
+
+import java.math.BigDecimal;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,8 +49,13 @@ public class DetailActivity extends BaseActivity {
     View viewBackground;
     @BindView(R.id.ll_container)
     LinearLayout llContainer;
-    @BindView(R.id.rl_title)
-    RelativeLayout rlTitle;
+    @BindView(R.id.view_title)
+    ViewGroup viewTitle;
+    @BindView(R.id.view_title_back)
+    View viewTitleBackground;
+    @BindView(R.id.rl_title_background)
+    RelativeLayout rlTitleBackground;
+
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.sv_content)
@@ -58,6 +66,7 @@ public class DetailActivity extends BaseActivity {
     RoundImageView ivCover;
 
     private Movie mData;
+    private int mTransValue;
 
     @Override
     protected int getLayoutId() {
@@ -83,11 +92,15 @@ public class DetailActivity extends BaseActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
 
+            int statusBarHeight = ScreenUtil.getStatusBarHeight(this);
             ViewGroup.LayoutParams titleParmas = viewTitleStatus.getLayoutParams();
-            titleParmas.height = ScreenUtil.getStatusBarHeight(this);
+            titleParmas.height = statusBarHeight;
 
             ViewGroup.LayoutParams contentParmas = viewContentStatus.getLayoutParams();
-            contentParmas.height = ScreenUtil.getStatusBarHeight(this);
+            contentParmas.height = statusBarHeight;
+
+            ViewGroup.LayoutParams layoutParams = viewTitle.getLayoutParams();
+            layoutParams.height = statusBarHeight + DensityUtil.dip2px(this, 49);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
             window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
@@ -104,14 +117,8 @@ public class DetailActivity extends BaseActivity {
 
     private void init() {
         setBackgroundColor();
-//        llContainer.post(() -> {
-//            int currentHeight = llContainer.getHeight();
-//            int minHeight = ScreenUtil.getScreenHeight(DetailActivity.this) - DensityUtil.dip2px(this, 116);
-//            if (currentHeight < minHeight) {
-//                ViewGroup.LayoutParams layoutParams = llContainer.getLayoutParams();
-//                layoutParams.height = minHeight;
-//            }
-//        });
+        rlTitleBackground.setAlpha(0f);
+        mTransValue = DensityUtil.dip2px(this, 90);
     }
 
     private void initListener() {
@@ -127,6 +134,15 @@ public class DetailActivity extends BaseActivity {
         svContent.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                // 标题的透明度控制
+                if (scrollY >= mTransValue) {
+                    if (rlTitleBackground.getAlpha() != 1) {
+                        rlTitleBackground.setAlpha(1f);
+                    }
+                } else {
+                    float alpha = BigDecimal.valueOf(scrollY).divide(BigDecimal.valueOf(mTransValue), 5, BigDecimal.ROUND_HALF_UP).floatValue();
+                    rlTitleBackground.setAlpha(alpha);
+                }
 //                float bottomBlinRootY = flBottomBlinRoot.getY();
                 // 抽屉的显示和隐藏  * 132 = 48标题高度 + 84底部拖拽栏高度
 //                if (scrollY >= (bottomBlinRootY - mScreenHeight + DensityUtil.dip2px(132))) {
@@ -136,16 +152,6 @@ public class DetailActivity extends BaseActivity {
 //                } else {
 //                    if (!vDrawer.isDrawerShow()) {
 //                        vDrawer.showDrawer();
-//                    }
-//                }
-//                // 标题的显示隐藏
-//                if (scrollY >= tvName.getY() + tvName.getHeight()) {
-//                    if (tvBarName.getVisibility() == View.GONE) {
-//                        tvBarName.setVisibility(View.VISIBLE);
-//                    }
-//                } else {
-//                    if (tvBarName.getVisibility() == View.VISIBLE) {
-//                        tvBarName.setVisibility(View.GONE);
 //                    }
 //                }
 //                // 顶部大本营动态栏的显示和隐藏
@@ -190,7 +196,7 @@ public class DetailActivity extends BaseActivity {
                                 public void onGenerated(Palette palette) {
                                     int darkMutedColor = palette.getDarkMutedColor(palette.getDarkMutedColor(Color.WHITE));
 
-                                    rlTitle.setBackgroundColor(darkMutedColor);
+                                    viewTitleBackground.setBackgroundColor(darkMutedColor);
                                     viewBackground.setBackgroundColor(darkMutedColor);
                                 }
                             });
