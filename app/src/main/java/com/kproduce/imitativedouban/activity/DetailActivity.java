@@ -12,11 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -231,29 +229,16 @@ public class DetailActivity extends BaseActivity {
         if (llTitleCover.getVisibility() == View.VISIBLE) {
             return;
         }
-        // 标题电影封面动画
         llTitleCover.setVisibility(View.VISIBLE);
-        TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 1, 0, 1, 0.7f, 1, 0f);
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1f);
+        // 标题电影封面——滑入动画
+        Animation coverAnimation = AnimationUtils.loadAnimation(this, R.anim.title_cover_in);
+        coverAnimation.setInterpolator(new DecelerateInterpolator());
+        llTitleCover.startAnimation(coverAnimation);
 
-        AnimationSet animationSet = new AnimationSet(true);
-        animationSet.addAnimation(translateAnimation);
-        animationSet.addAnimation(alphaAnimation);
-        animationSet.setDuration(250);
-        animationSet.setInterpolator(new DecelerateInterpolator());
-
-        llTitleCover.startAnimation(animationSet);
-
-        // 标题文字动画
-        TranslateAnimation titleTranslateAnimation = new TranslateAnimation(0, 0, 1, 0, 1, 0, 1, -0.5f);
-        AlphaAnimation titleAlphaAnimation = new AlphaAnimation(1f, 0f);
-
-        AnimationSet titleAnimationSet = new AnimationSet(true);
-        titleAnimationSet.addAnimation(titleTranslateAnimation);
-        titleAnimationSet.addAnimation(titleAlphaAnimation);
-        titleAnimationSet.setDuration(250);
-        titleAnimationSet.setInterpolator(new DecelerateInterpolator());
-        titleAnimationSet.setAnimationListener(new Animation.AnimationListener() {
+        // 标题文字——滑出动画
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.title_name_out);
+        animation.setInterpolator(new DecelerateInterpolator());
+        animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
 
@@ -269,22 +254,17 @@ public class DetailActivity extends BaseActivity {
 
             }
         });
-        tvTitle.startAnimation(titleAnimationSet);
+        tvTitle.startAnimation(animation);
     }
 
     private void dismissTitileCover() {
         if (tvTitle.getVisibility() == View.VISIBLE) {
             return;
         }
-        // 标题电影封面动画
-        TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 1, 0, 1, 0f, 1, 0.7f);
-        AlphaAnimation alphaAnimation = new AlphaAnimation(1f, 0f);
-        AnimationSet animationSet = new AnimationSet(true);
-        animationSet.addAnimation(translateAnimation);
-        animationSet.addAnimation(alphaAnimation);
-        animationSet.setDuration(250);
-        animationSet.setInterpolator(new DecelerateInterpolator());
-        animationSet.setAnimationListener(new Animation.AnimationListener() {
+        // 标题电影封面——滑出动画
+        Animation coverAnimation = AnimationUtils.loadAnimation(this, R.anim.title_cover_out);
+        coverAnimation.setInterpolator(new DecelerateInterpolator());
+        coverAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
 
@@ -300,18 +280,12 @@ public class DetailActivity extends BaseActivity {
 
             }
         });
-        llTitleCover.startAnimation(animationSet);
+        llTitleCover.startAnimation(coverAnimation);
 
-        // 标题文字动画
+        // 标题文字——滑入动画
         tvTitle.setVisibility(View.VISIBLE);
-        TranslateAnimation titleTranslateAnimation = new TranslateAnimation(0, 0, 1, 0, 1, -0.5f, 1, 0);
-        AlphaAnimation titleAlphaAnimation = new AlphaAnimation(0f, 1f);
-
-        AnimationSet titleAnimationSet = new AnimationSet(true);
-        titleAnimationSet.addAnimation(titleTranslateAnimation);
-        titleAnimationSet.addAnimation(titleAlphaAnimation);
-        titleAnimationSet.setDuration(250);
-        titleAnimationSet.setInterpolator(new DecelerateInterpolator());
-        tvTitle.startAnimation(titleAnimationSet);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.title_name_in);
+        animation.setInterpolator(new DecelerateInterpolator());
+        tvTitle.startAnimation(animation);
     }
 }
