@@ -8,13 +8,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.graphics.Palette;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,11 +26,15 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.kproduce.imitativedouban.Constants;
 import com.kproduce.imitativedouban.R;
+import com.kproduce.imitativedouban.bean.Actor;
+import com.kproduce.imitativedouban.bean.Comment;
 import com.kproduce.imitativedouban.bean.Movie;
 import com.kproduce.imitativedouban.utils.DensityUtil;
 import com.kproduce.imitativedouban.utils.ScreenUtil;
 import com.kproduce.imitativedouban.view.VerticalDrawerLayout;
+import com.kproduce.roundcorners.CircleImageView;
 import com.kproduce.roundcorners.RoundImageView;
 
 import java.math.BigDecimal;
@@ -43,17 +47,6 @@ import butterknife.OnClick;
  * @date 2019/9/2
  */
 public class DetailActivity extends BaseActivity {
-    /**
-     * 内容
-     */
-    @BindView(R.id.view_content_status)
-    View viewContentStatus;
-    @BindView(R.id.view_background)
-    View viewBackground;
-    @BindView(R.id.ll_container)
-    LinearLayout llContainer;
-    @BindView(R.id.iv_cover)
-    RoundImageView ivCover;
     /**
      * 标题栏
      */
@@ -69,10 +62,35 @@ public class DetailActivity extends BaseActivity {
     RoundImageView ivTitleCover;
     @BindView(R.id.tv_title_name)
     TextView tvTitleName;
+    @BindView(R.id.tv_title_desc)
+    TextView tvTitleDesc;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.ll_title_cover)
     LinearLayout llTitleCover;
+    /**
+     * 内容
+     */
+    @BindView(R.id.view_content_status)
+    View viewContentStatus;
+    @BindView(R.id.view_background)
+    View viewBackground;
+    @BindView(R.id.ll_container)
+    LinearLayout llContainer;
+    @BindView(R.id.iv_cover)
+    RoundImageView ivCover;
+    @BindView(R.id.tv_detail_name)
+    TextView tvDetailName;
+    @BindView(R.id.tv_detail_sec_title)
+    TextView tvDetailSecTitle;
+    @BindView(R.id.tv_detail_info)
+    TextView tvDetailInfo;
+    @BindView(R.id.tv_detail_desc)
+    TextView tvDetailDesc;
+    @BindView(R.id.ll_actor_container)
+    LinearLayout llActorContainer;
+    @BindView(R.id.ll_comment_container)
+    LinearLayout llCommentContainer;
 
     @BindView(R.id.sv_content)
     NestedScrollView svContent;
@@ -130,12 +148,50 @@ public class DetailActivity extends BaseActivity {
     }
 
     private void init() {
-        mTransValue = DensityUtil.dip2px(this, 90);
+        mTransValue = DensityUtil.dip2px(this, 70);
         setBackgroundColor();
         rlTitleBackground.setAlpha(0f);
         tvTitleName.setText(mData.getTitle());
+        tvTitleDesc.setText(mData.getSecTitle());
         ivTitleCover.setImageResource(mData.getCoverId());
+        tvDetailName.setText(mData.getTitle());
+        tvDetailSecTitle.setText(mData.getSecTitle());
+        tvDetailInfo.setText(mData.getInfo());
+        tvDetailDesc.setText(mData.getDesc());
 
+        for (int i = 0; i < Constants.ACTORS.size(); i++) {
+            Actor actor = Constants.ACTORS.get(i);
+            View view = LayoutInflater.from(this).inflate(R.layout.item_actor, null);
+            View viewBlank = view.findViewById(R.id.view_blank);
+            RoundImageView ivCover = view.findViewById(R.id.iv_cover);
+            TextView tvName = view.findViewById(R.id.tv_name);
+            TextView tvDesc = view.findViewById(R.id.tv_desc);
+
+            viewBlank.setVisibility(i == 0 ? View.VISIBLE : View.GONE);
+            ivCover.setImageResource(actor.getCoverId());
+            tvName.setText(actor.getName());
+            tvDesc.setText(actor.getDesc());
+
+            llActorContainer.addView(view);
+        }
+
+        for (int i = 0; i < Constants.COMMENTS.size(); i++) {
+            Comment comment = Constants.COMMENTS.get(i);
+            View view = LayoutInflater.from(this).inflate(R.layout.item_comment, null);
+            CircleImageView ivAvatar = view.findViewById(R.id.iv_avatar);
+            TextView tvName = view.findViewById(R.id.tv_name);
+            TextView tvTime = view.findViewById(R.id.tv_time);
+            TextView tvComment = view.findViewById(R.id.tv_comment);
+            View line = view.findViewById(R.id.view_line);
+
+            line.setVisibility(i == Constants.COMMENTS.size() - 1 ? View.GONE : View.VISIBLE);
+            ivAvatar.setImageResource(comment.getAvatarId());
+            tvName.setText(comment.getName());
+            tvTime.setText(comment.getTime());
+            tvComment.setText(comment.getComment());
+
+            llCommentContainer.addView(view);
+        }
     }
 
     private void initListener() {
@@ -155,8 +211,8 @@ public class DetailActivity extends BaseActivity {
                 if (scrollY >= mTransValue) {
                     if (rlTitleBackground.getAlpha() != 1) {
                         rlTitleBackground.setAlpha(1f);
-                        showTitleCover();
                     }
+                    showTitleCover();
                 } else {
                     float alpha = BigDecimal.valueOf(scrollY).divide(BigDecimal.valueOf(mTransValue), 5, BigDecimal.ROUND_HALF_UP).floatValue();
                     rlTitleBackground.setAlpha(alpha);
@@ -232,12 +288,10 @@ public class DetailActivity extends BaseActivity {
         llTitleCover.setVisibility(View.VISIBLE);
         // 标题电影封面——滑入动画
         Animation coverAnimation = AnimationUtils.loadAnimation(this, R.anim.title_cover_in);
-        coverAnimation.setInterpolator(new DecelerateInterpolator());
         llTitleCover.startAnimation(coverAnimation);
 
         // 标题文字——滑出动画
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.title_name_out);
-        animation.setInterpolator(new DecelerateInterpolator());
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -263,7 +317,6 @@ public class DetailActivity extends BaseActivity {
         }
         // 标题电影封面——滑出动画
         Animation coverAnimation = AnimationUtils.loadAnimation(this, R.anim.title_cover_out);
-        coverAnimation.setInterpolator(new DecelerateInterpolator());
         coverAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -285,7 +338,6 @@ public class DetailActivity extends BaseActivity {
         // 标题文字——滑入动画
         tvTitle.setVisibility(View.VISIBLE);
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.title_name_in);
-        animation.setInterpolator(new DecelerateInterpolator());
         tvTitle.startAnimation(animation);
     }
 }

@@ -8,5 +8,6 @@
     <color name="line">#F8F8FA</color>
     <color name="back_shadow_start">#4DFFFFFF</color>
     <color name="back_shadow_end">#26FFFFFF</color>
-    <color name="back_shadow_title">#33FFFFFF</color>
+    <color name="title_desc">#99FFFFFF</color>
+    <color name="comment_back">#1a000000</color>
 </resources>

@@ -9,13 +9,15 @@ public class Movie implements Serializable {
     private String title;
     private String secTitle;
     private String desc;
+    private String info;
     private int coverId;
 
-    public Movie(String title, String secTitle, String desc, int coverId) {
+    public Movie(String title, String secTitle, String desc, int coverId, String info) {
         this.title = title;
         this.secTitle = secTitle;
         this.desc = desc;
         this.coverId = coverId;
+        this.info = info;
     }
 
     public String getTitle() {
@@ -32,5 +34,9 @@ public class Movie implements Serializable {
 
     public int getCoverId() {
         return coverId;
+    }
+
+    public String getInfo() {
+        return info;
     }
 }

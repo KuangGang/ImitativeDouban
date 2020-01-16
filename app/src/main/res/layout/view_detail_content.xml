@@ -1,55 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sv_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/sv_content"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:layout_height="wrap_content">
 
-        <FrameLayout
+        <View
+            android:id="@+id/view_background"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent" />
 
-            <View
-                android:id="@+id/view_background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+        <LinearLayout
+            android:id="@+id/ll_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <View
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_background_shadow" />
+                android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/ll_container"
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_background_shadow" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:id="@+id/view_content_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal"
+                        android:paddingStart="13dp"
+                        android:paddingEnd="13dp">
+
+                        <com.kproduce.roundcorners.RoundImageView
+                            android:id="@+id/iv_cover"
+                            android:layout_width="106dp"
+                            android:layout_height="148dp"
+                            android:scaleType="centerCrop"
+                            app:rRadius="8dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_detail_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@android:color/white"
+                                android:textSize="23sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_detail_sec_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@android:color/white"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_detail_info"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:textColor="@color/title_desc"
+                                android:textSize="11sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal">
+
+                                <com.kproduce.roundcorners.RoundLinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    app:rRadius="5dp">
+
+                                    <ImageView
+                                        android:layout_width="15dp"
+                                        android:layout_height="15dp"
+                                        android:src="@mipmap/ic_want_see" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="4dp"
+                                        android:text="@string/want_see"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                </com.kproduce.roundcorners.RoundLinearLayout>
+
+
+                                <com.kproduce.roundcorners.RoundLinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_weight="1"
+                                    android:background="@android:color/white"
+                                    android:gravity="center"
+                                    android:orientation="horizontal"
+                                    app:rRadius="5dp">
+
+                                    <ImageView
+                                        android:layout_width="15dp"
+                                        android:layout_height="15dp"
+                                        android:src="@mipmap/ic_already_see" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="4dp"
+                                        android:text="@string/already_see"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                </com.kproduce.roundcorners.RoundLinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:paddingStart="13dp"
+                        android:paddingEnd="13dp"
+                        android:text="@string/actor"
+                        android:textColor="@android:color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:scrollbars="none">
+
+                        <LinearLayout
+                            android:id="@+id/ll_actor_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" />
+                    </HorizontalScrollView>
+                </LinearLayout>
+            </FrameLayout>
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:orientation="vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
+                android:layout_height="wrap_content">
 
                 <View
-                    android:id="@+id/view_content_status"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp" />
+                    android:layout_height="match_parent"
+                    android:background="@color/back_shadow_end" />
 
-                <com.kproduce.roundcorners.RoundImageView
-                    android:id="@+id/iv_cover"
-                    android:layout_width="112dp"
-                    android:layout_height="160dp"
-                    android:layout_marginTop="20dp"
-                    android:scaleType="centerCrop"
-                    app:rRadius="8dp" />
-
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="1000dp" />
-            </LinearLayout>
-        </FrameLayout>
-    </android.support.v4.widget.NestedScrollView>
-</RelativeLayout>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="13dp"
+                    android:paddingEnd="13dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/desc"
+                        android:textColor="@android:color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_detail_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:lineSpacingExtra="2dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp" />
+
+                    <com.kproduce.roundcorners.RoundLinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:orientation="vertical"
+                        android:background="@color/comment_back"
+                        app:rRadius="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginTop="20dp"
+                            android:text="@string/comment"
+                            android:textColor="@android:color/white"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_comment_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="13dp"
+                            android:layout_marginEnd="13dp"
+                            android:orientation="vertical" />
+                    </com.kproduce.roundcorners.RoundLinearLayout>
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+</android.support.v4.widget.NestedScrollView>

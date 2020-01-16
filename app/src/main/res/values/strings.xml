@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">ImitativeDouban</string>
     <string name="movie">电影</string>
+    <string name="want_see">想看</string>
+    <string name="already_see">看过</string>
+    <string name="desc">简介</string>
+    <string name="actor">演职员</string>
+    <string name="comment">短评</string>
 </resources>
