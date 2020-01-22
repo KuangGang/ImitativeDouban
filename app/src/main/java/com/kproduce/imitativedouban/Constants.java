@@ -49,7 +49,7 @@ public class Constants {
                 R.mipmap.ic_avatar_01));
         COMMENTS.add(new Comment("天才樱木",
                 "2011年8月13日",
-                "场面还挺刺激的，但是完全看不懂啊喂！！有没有简单点搞笑的！！",
+                "场面还挺刺激的，但是完全看不懂啊！！有没有简单点搞笑的！！",
                 R.mipmap.ic_avatar_02));
         COMMENTS.add(new Comment("三井",
                 "2008年4月9日",
